@@ -20,7 +20,7 @@ export default function ViewProfile(props) {
   // Separate function to get user details
   async function getUser() {
     const response = await fetch(
-      `http://localhost:5000/api/auth/getDetails/${id}`,
+      `http://localhost:5001/api/auth/getDetails/${id}`,
       {
         method: "GET",
         headers: {

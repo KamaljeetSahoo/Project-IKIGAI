@@ -19,7 +19,7 @@ export default function About(props) {
   // Separate function to get user details
 
   async function getUser() {
-    const response = await fetch(`http://localhost:5000/api/auth/getUser`, {
+    const response = await fetch(`http://localhost:5001/api/auth/getUser`, {
       method: "GET",
       headers: {
         "auth-token": localStorage.getItem("token"),
