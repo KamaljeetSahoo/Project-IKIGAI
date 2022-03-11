@@ -20,7 +20,7 @@ const Water = () => {
 	const getWater = (data) => {
 		return data.waterIntake[data.waterIntake.length - 1].water
 	}
-	
+
   async function getUser() {
     const response = await fetch(`http://localhost:5001/api/auth/getUser`, {
       method: "GET",
@@ -43,6 +43,7 @@ const Water = () => {
 			});
 			const resp = await response.json();
 			console.log(resp)
+			getUser();
 		}
 		catch (error) {
 			console.log(error)
