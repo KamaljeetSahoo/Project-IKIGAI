@@ -28,6 +28,12 @@ const UserSchema = new Schema({
   enrolledUnder: {
     type: String,
   },
+  waterIntake: [
+    {
+      date: String,
+      water: Number
+    }
+  ]
 });
 const User = new mongoose.model("user", UserSchema);
 User.createIndexes();

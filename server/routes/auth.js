@@ -145,4 +145,38 @@ router.get("/getDetailsofEmployee/:id", fetchUser, async (req, res) => {
   }
 });
 
+router.post("/addWater", fetchUser, async(req, res) => {
+  try{
+    const id = req.user.id;
+    const user = await User.findById(id)
+    const date = new Date()
+    const currentDate = date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
+    if (user.waterIntake == 'undefined'){
+      const waterObject = {
+        date: currentDate,
+        water: 250
+      }
+      await user.waterIntake.push(waterObject)
+    }
+    else if(user.waterIntake[user.waterIntake.length-1].date === currentDate){
+      user.waterIntake[user.waterIntake.length-1] = {
+        date: currentDate,
+        water: user.waterIntake[user.waterIntake.length-1].water + 250
+      }
+    }
+    else{
+      const waterObject = {
+        date: currentDate,
+        water: 250
+      }
+      await user.waterIntake.push(waterObject)
+    }
+    await user.save()
+    res.send(JSON.stringify({"abc": "123", "def": 34}))
+  }
+  catch (error){
+    console.log(error)
+  }
+}) 
+
 module.exports = router;
