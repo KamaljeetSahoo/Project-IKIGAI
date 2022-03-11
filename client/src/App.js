@@ -12,6 +12,7 @@ import SignupHome from "./components/SignupHome";
 import { SignupEmployee } from "./components/employee/SignupEmployee";
 import { Notfound } from "./components/Notfound";
 import HomeEmployer from "./components/organization/HomeEmployer";
+import ViewProfile from "./components/organization/ViewProfile";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -38,6 +39,7 @@ function App() {
             <Route exact path="/signuphome" element={<SignupHome showAlert={showAlert} />} />
             <Route exact path="/signup" element={<Signup showAlert={showAlert} />} />
             <Route exact path="/signupemployee" element={<SignupEmployee showAlert={showAlert} />} />
+            <Route exact path="/viewProfile/:id" element={<ViewProfile showAlert={showAlert} />} />
             <Route path="*" element={<Notfound />} />
           </Routes>
         </div>

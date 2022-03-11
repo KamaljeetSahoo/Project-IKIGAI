@@ -27,6 +27,7 @@ export default function HomeEmployer(props) {
     });
     const data = await response.json();
     settotalcards(data);
+    setusercards(data);
   }
 
   function filterUsers() {
