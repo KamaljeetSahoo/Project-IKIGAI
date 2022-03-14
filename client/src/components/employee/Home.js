@@ -7,18 +7,18 @@ export default function Home(props) {
   const [profile, setProfile] = useState([]);
 
   useEffect(() => {
-    getUser();
-  },[navigate]);
-
-  // Separate function to get user details
-
-  async function getUser() {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
     if (localStorage.getItem("role") === "employer") {
       navigate("*");
     }
+    getUser();
+  },[]);
+
+  // Separate function to get user details
+
+  async function getUser() {
     const response = await fetch(`http://localhost:5001/api/auth/getUser`, {
       method: "GET",
       headers: {
