@@ -33,6 +33,38 @@ const UserSchema = new Schema({
       date: String,
       water: Number
     }
+  ],
+  food: [
+    {
+      date: String,
+      foodList: [
+        {
+          foodName: String,
+          calories: Number,
+          quantity: String,
+        }
+      ],
+      totalCalories: Number
+    }
+  ],
+  exercise: [
+    {
+      date: String,
+      exerciseList: [
+        {
+          exerciseName: String,
+          caloriesBurnt: Number,
+          time: Number,
+        }
+      ],
+      totalCaloriesBurnt: Number
+    }
+  ],
+  meditation: [
+    {
+      date: String,
+      time: Number,
+    }
   ]
 });
 const User = new mongoose.model("user", UserSchema);

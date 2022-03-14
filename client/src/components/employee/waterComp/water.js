@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
-const Water = () => {
-  let navigate = useNavigate();
-  const [profile, setProfile] = useState([]);
+const Water = (props) => {
+  // let navigate = useNavigate();
+  const [profile, setProfile] = useState(props.profile);
 	const [water, setWater] = useState(0);
 
   useEffect(() => {
-    if (!localStorage.getItem("token")) {
-      navigate("/login");
-    }
-    if (localStorage.getItem("role") === "employer") {
-      navigate("*");
-    }
-    getUser();
-  }, []);
+    setWater(getWater(profile))
+  })
 
   // Separate function to get user details
 	const getWater = (data) => {
@@ -42,8 +36,8 @@ const Water = () => {
 				},
 			});
 			const resp = await response.json();
+      getUser()
 			console.log(resp)
-			getUser();
 		}
 		catch (error) {
 			console.log(error)

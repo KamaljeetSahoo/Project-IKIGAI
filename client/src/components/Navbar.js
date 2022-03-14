@@ -54,6 +54,15 @@ export default function Navbar(props) {
                       Home
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link 
+                      className={`nav-link ${
+                        location.pathname === "/exercise" ? "active" : ""
+                      }`}
+                      to='/exercise'>
+                      Exercise
+                    </Link>
+                  </li>
                 </ul>
                 <button className="btn btn-primary mx-1" onClick={handleLogout}>
                   logout
