@@ -12,6 +12,9 @@ const Water = (props) => {
 
   // Separate function to get user details
 	const getWater = (data) => {
+    if(data.waterIntake.length === 0){
+      return 0
+    }
 		return data.waterIntake[data.waterIntake.length - 1].water
 	}
 

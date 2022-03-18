@@ -14,6 +14,7 @@ import { Notfound } from "./components/Notfound";
 import HomeEmployer from "./components/organization/HomeEmployer";
 import ViewProfile from "./components/organization/ViewProfile";
 import Exercise from './components/employee/exercise/Exercise'
+import Diet from './components/employee/diet/Diet'
 function App() {
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {
@@ -41,6 +42,7 @@ function App() {
             <Route exact path="/signupemployee" element={<SignupEmployee showAlert={showAlert} />} />
             <Route exact path="/viewProfile/:id" element={<ViewProfile showAlert={showAlert} />} />
             <Route exact path="/exercise" element={<Exercise showAlert={showAlert} />} />
+            <Route exact path="/diet" element={<Diet showAlert={showAlert}/>} />
             <Route path="*" element={<Notfound />} />
           </Routes>
         </div>
