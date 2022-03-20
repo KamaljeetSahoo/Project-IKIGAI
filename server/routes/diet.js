@@ -65,4 +65,16 @@ router.post("/addFood", fetchUser, async(req, res) => {
     }
 })
 
+router.get("/fetchFood", fetchUser, async(req, res) => {
+    try{
+        const id = req.user.id;
+        const user = await User.findById(id)
+        //res.send(user)
+        res.send(JSON.stringify(user.food[user.food.length - 1].foodList))
+    }
+    catch(error){
+        console.log(error)
+    }
+})
+
 module.exports = router;
