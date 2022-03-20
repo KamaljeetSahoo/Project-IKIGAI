@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChatBot from "react-simple-chatbot";
 import { Button, Modal } from "react-bootstrap";
 
@@ -6,7 +6,38 @@ const DietChat = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  async function fetchNutrients(data) {
+    console.log(data, typeof(data))
+    const response = await fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-app-id": "19dae9d9",
+        "x-app-key": "0c90262650ffa31caca86100a8c34e48",
+      },
+      body: JSON.stringify({
+        "query": data,
+      })
+    })
+    const resp = await response.json()
+    console.log(resp)
+  }
+
+  const FoodComponent = (props) => {
+    const { steps } = props;
+    const { userInput } = steps;
+    
+    fetchNutrients(userInput.message)
+
+    
+    return (
+      <h3>{userInput.message}</h3>
+    )
+  }
+
   const ChatComponent = () => {
+		const [food, setFood] = useState('')
     return (
       <Modal
         show={show}
@@ -14,13 +45,25 @@ const DietChat = () => {
         aria-labelledby="contained-modal-title-vcenter"
       >
         <ChatBot
+					headerTitle = "Your Personal AI assistant for analysing food"
           style={{ width: "100%" }}
           steps={[
             {
-              id: "hello-world",
-              message: "HEllo World",
-              end: true,
+              id: "intro",
+              message: "What did you eat ?",
+							trigger: "userInput"
             },
+            {
+              id: "userInput",
+							user: true,
+							trigger: "output"
+            },
+						{
+							id: "output",
+              component: <FoodComponent/>,
+              asMessage: true,
+							end: true,
+						}
           ]}
         />
       </Modal>

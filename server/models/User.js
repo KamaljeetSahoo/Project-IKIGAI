@@ -43,8 +43,7 @@ const UserSchema = new Schema({
           calories: Number,
           quantity: String,
         }
-      ],
-      totalCalories: Number
+      ]
     }
   ],
   exercise: [
