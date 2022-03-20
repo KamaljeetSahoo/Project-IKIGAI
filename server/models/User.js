@@ -42,6 +42,7 @@ const UserSchema = new Schema({
           foodName: String,
           calories: Number,
           quantity: String,
+          imgLink: String,
         }
       ]
     }
