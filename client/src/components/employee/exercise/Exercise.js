@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ExerciseList from './ExerciseList'
 
 const Exercise = () => {
   let navigate = useNavigate();
   const [profile, setProfile] = useState([]);
   const [query, setquery] = useState("");
-  const [exercise, setexercise] = useState([
-    {
-      exerciseName: "",
-      caloriesBurnt: "",
-    },
-  ]);
+ 
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -23,6 +19,27 @@ const Exercise = () => {
   }, []);
 
   // Separate function to get user details
+
+  async function addExercise(data) {
+    for (var i=0; i<data.exercises.length; i++) {
+      const name = data.exercises[i].user_input;
+      const cals = data.exercises[i].nf_calories;
+      console.log(name, cals)
+
+      const response = await fetch(`http://localhost:5001/api/exercise/addExercise`, {
+        method: 'POST',
+        headers: {
+          "auth-token": localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          cals: cals,
+        })
+      })
+      console.log(response.json())
+    }
+  }
 
   async function getUser() {
     const response = await fetch(`http://localhost:5001/api/auth/getUser`, {
@@ -50,19 +67,16 @@ const Exercise = () => {
       }
     );
     const resp = await response.json();
-    setexercise([
-      ...exercise,
-      {
-        exerciseName: resp.exercises.user_input,
-        caloriesBurnt: resp.exercises.nf_calories,
-      },
-    ]);
-    console.log(resp.exercises[0].nf_calories);
+    console.log(resp);
+    if(resp !== null){
+      addExercise(resp)
+    }
   }
 
   return (
     <>
       <div className="container mt-5">
+      <ExerciseList></ExerciseList>
         <div className="input-group mb-3">
           <input
             className="form-control mr-sm-6"
