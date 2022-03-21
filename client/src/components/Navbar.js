@@ -57,6 +57,15 @@ export default function Navbar(props) {
                   <li className="nav-item">
                     <Link 
                       className={`nav-link ${
+                        location.pathname === "/chat" ? "active" : ""
+                      }`}
+                      to='/chat'>
+                      Chat
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link 
+                      className={`nav-link ${
                         location.pathname === "/exercise" ? "active" : ""
                       }`}
                       to='/exercise'>
@@ -92,6 +101,15 @@ export default function Navbar(props) {
                       to="/about"
                     >
                       About
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link 
+                      className={`nav-link ${
+                        location.pathname === "/chat" ? "active" : ""
+                      }`}
+                      to='/chat'>
+                      Chat
                     </Link>
                   </li>
                 </ul>

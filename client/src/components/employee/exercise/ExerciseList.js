@@ -19,6 +19,7 @@ const ExerciseList = () => {
     useEffect(async () => {
         console.log(fetchExercise())
     }, [])
+    
   return (
     <div className='container'>
         <table className='table table-striped table-dark text-center'>

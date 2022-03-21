@@ -90,7 +90,7 @@ const Exercise = () => {
             type="submit"
             onClick={fetchExercise}
           >
-            <i className="fas fa-search" style={{ borderRadius: "4px" }}></i>
+            <i style={{ borderRadius: "4px" }}>Add Exercise</i>
           </button>
         </div>
       </div>
