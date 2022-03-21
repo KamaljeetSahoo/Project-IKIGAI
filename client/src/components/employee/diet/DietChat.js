@@ -82,6 +82,7 @@ const DietChat = () => {
       >
         <ChatBot
 					headerTitle = "Your Personal AI assistant for analysing food"
+          recognitionEnable={true}
           style={{ width: "100%" }}
           steps={[
             {
