@@ -150,8 +150,9 @@ router.post("/addWater", fetchUser, async(req, res) => {
     const id = req.user.id;
     const user = await User.findById(id)
     const date = new Date()
+    console.log("water")
     const currentDate = date.getDate()+'-'+date.getMonth()+'-'+date.getFullYear()
-    if (user.waterIntake == 'undefined'){
+    if (user.waterIntake.length == 0){
       const waterObject = {
         date: currentDate,
         water: 250

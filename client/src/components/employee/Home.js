@@ -74,13 +74,6 @@ export default function Home(props) {
                           <i className="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>
                           {profile.enrolledUnder}
                         </p>
-                        <p>
-                          <i className="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-blue"></i>
-                          {
-                            profile.exercise[profile.exercise.length - 1]
-                              .totalCaloriesBurnt
-                          }
-                        </p>
                       </div>
                     </div>
                   </div>
@@ -95,7 +88,7 @@ export default function Home(props) {
                   <p class="card-text">
                     <h2>
                       {
-                        profile.exercise[profile.exercise.length - 1]
+                        profile.exercise && profile.exercise[profile.exercise.length - 1]
                           .totalCaloriesBurnt
                       }
                     </h2>

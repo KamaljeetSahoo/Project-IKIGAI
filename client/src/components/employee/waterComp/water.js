@@ -8,7 +8,7 @@ const Water = (props) => {
 
   useEffect(() => {
     setWater(getWater(profile))
-  })
+  }, [])
 
   // Separate function to get user details
 	const getWater = (data) => {
@@ -30,6 +30,7 @@ const Water = (props) => {
 		setWater(getWater(data))
   }
 	async function addWater() {
+    console.log("avsv")
 		try {
 			const response = await fetch(`http://localhost:5001/api/auth/addWater`, {
 				method: "POST",
