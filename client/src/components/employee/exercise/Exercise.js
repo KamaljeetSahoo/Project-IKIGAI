@@ -5,6 +5,12 @@ const Exercise = () => {
   let navigate = useNavigate();
   const [profile, setProfile] = useState([]);
   const [query, setquery] = useState("");
+  const [exercise, setexercise] = useState([
+    {
+      exerciseName: "",
+      caloriesBurnt: "",
+    },
+  ]);
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
@@ -29,7 +35,7 @@ const Exercise = () => {
     setProfile(data);
   }
 
-  async function fetchExcercise(data) {
+  async function fetchExercise(data) {
     console.log(data, typeof data);
     const response = await fetch(
       "https://trackapi.nutritionix.com/v2/natural/exercise",
@@ -44,7 +50,14 @@ const Exercise = () => {
       }
     );
     const resp = await response.json();
-    console.log(resp);
+    setexercise([
+      ...exercise,
+      {
+        exerciseName: resp.exercises.user_input,
+        caloriesBurnt: resp.exercises.nf_calories,
+      },
+    ]);
+    console.log(resp.exercises[0].nf_calories);
   }
 
   return (
@@ -61,7 +74,7 @@ const Exercise = () => {
           <button
             className="btn btn-primary my-2 my-sm-0 mx-2"
             type="submit"
-            onClick={fetchExcercise}
+            onClick={fetchExercise}
           >
             <i className="fas fa-search" style={{ borderRadius: "4px" }}></i>
           </button>

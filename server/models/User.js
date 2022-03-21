@@ -52,8 +52,7 @@ const UserSchema = new Schema({
       exerciseList: [
         {
           exerciseName: String,
-          caloriesBurnt: Number,
-          time: Number,
+          caloriesBurnt: String,
         }
       ],
       totalCaloriesBurnt: Number
