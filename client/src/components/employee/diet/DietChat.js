@@ -1,14 +1,48 @@
 import React, { useState, useEffect } from "react";
 import ChatBot from "react-simple-chatbot";
 import { Button, Modal } from "react-bootstrap";
+import { add } from "date-fns";
 
 const DietChat = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  async function addFood(data) {
+    for (var i=0; i<data.foods.length; i++) {
+      const name = data.foods[i].food_name;
+      const cals = data.foods[i].nf_calories;
+      const quantity = data.foods[i].serving_weight_grams;
+      const imgLink = data.foods[i].photo.thumb;
+      console.log(name, cals, quantity, imgLink)
+
+      const response = await fetch(`http://localhost:5001/api/diet/addFood`, {
+        method: 'POST',
+        headers: {
+          "auth-token": localStorage.getItem("token"),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          cals: cals,
+          quantity: quantity,
+          imgLink: imgLink
+        })
+      })
+      console.log(response.json())
+    }
+    
+    const response = await fetch(`http://localhost:5001/api/diet/addFood`, {
+      method: 'POST',
+      headers: {
+        "auth-token": localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data)
+    })
+  }
+
   async function fetchNutrients(data) {
-    console.log(data, typeof(data))
     const response = await fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
       method: "POST",
       headers: {
@@ -21,7 +55,9 @@ const DietChat = () => {
       })
     })
     const resp = await response.json()
-    console.log(resp)
+    if(resp !== null){
+      addFood(resp)
+    }
   }
 
   const FoodComponent = (props) => {
